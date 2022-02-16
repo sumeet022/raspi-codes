@@ -1,0 +1,117 @@
+pinout-structure/hardware of raspberry pi
+GPIO-german input or output
+sudo nano filename.py - to create a file
+sudo python3 filename.py -to execute a file name
+sudo shutdown now	
+sudo raspi-config
+s pin -data pin
+negative pin-gnd
+middle - power pin
+cd LCD-show
+sudo ./LCD35-show - to show the lcd screen
+sudo ./LCD-hdmi - to shutdown lcd screen
+ssh pi@ip-address //to connect via secure shell
+arecord -D plughw:2,0 test.wav
+aplay -l -to check the speakers card and device number
+
+In ras-pi:
+
+gpio -g mode 2 out
+gpio -g write 2 1 //to on the led
+gpio -g write 2 0 //to off the led
+
+//changing the permissions of a folder 
+sudo chmod -R 777 foldername
+ls -artl - to check the permissions of the file
+
+//to execute a bin file
+#!/bin/bash
+gpio -g mode 2 out
+gpio -g write 2 1
+
+//amazon aws 
+EC2 - virtually private server - elastic compute cloud.
+
+
+PHP
+echo - to print a line
+$a - used to define var
+<?php ?> - define the php
+<br> - to break the line
+""-value of that var
+(.)->concatenation in PHP
+gettype($a) -> it is used to get data type.
+
+d - date
+D - day
+m - month numerical
+M - month string
+y- year numerical ex: 21,22 etc
+Y - full year ex: 2021,2022 etc
+for local timezone
+date_default_timezone_set('Asia/Dubai') -> to set default timezone
+157.175.87.229 - ip address
+
+iot_user-username
+iot@1122-pass
+$query = "insert into sensor_date(date,time,humidity, temperature)"
+$result = mysqli_server($con,$query)
+if(True){
+echo "";
+}
+else{
+echo "";
+}
+
+To get the data in AWS server i.e MYSQL
+String api = "http://157.175.87.229/iot_code.php?hum="+String(hum)+"&temp="+String(temp);
+  HTTPClient http;
+  http.begin(api); // this is just to hit the line 29 of API
+  int code = http.GET();  // if you get 40x then fail if 20x then successful
+  String response = http.getString();
+  Serial.println(code);
+  Serial.println(response);
+--------------------------------------------------------
+Display the data into the webpage
+
+<html>
+<title>My DHT Sensor Data</title>
+<center>
+<h1> My Sensor Data </h1>
+<table border = "3" width="50%">
+<head>
+<meta http-equiv = "refresh" content="5"> // to refresh the webpage for every 5 sec //
+</head>
+<tr>
+<th>Id</th>
+<th>Date</th>
+<th>Time</th>
+<th>Temperature</th>
+<th>Humidity</th>
+</tr>
+
+<?php
+$host = "localhost";
+$db = "iot_lab";
+$user = "iot_user";
+$pass = "iot@1122";
+$con = mysqli_connect($host,$user,$pass,$db);
+$query = "select * from DHT_sensor order by id Desc"; // 
+$result = mysqli_query($con,$query);
+$count = mysqli_num_rows($result);
+//echo $count;
+//echo "<br>";
+while($row = mysqli_fetch_array($result)){
+	echo "<tr>";
+	echo "<td>".$row['id']."</td>";
+	echo "<td>".$row['date']."</td>";
+	echo "<td>".$row['time']."</td>";
+	echo "<td>".$row['humidity']."</td>";
+	echo "<td>".$row['temperature']."</td>";
+	echo "</tr>";
+}
+?>
+
+     </table>
+</center>
+</html>
